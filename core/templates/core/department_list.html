@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Кафедри — ФПРН НаУКМА{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Кафедри факультету</h2>
+<div class="list-group shadow-sm border-0">
+    {% for department in departments %}
+    <div class="list-group-item list-group-item-action p-4 mb-3 rounded border-0">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+            <h4 class="mb-1">
+                <a href="{% url 'department_detail' department.pk %}" class="text-decoration-none text-primary">
+                    {{ department.name }}
+                </a>
+            </h4>
+            <a href="{% url 'department_detail' department.pk %}" class="btn btn-primary btn-sm">Переглянути</a>
+        </div>
+        <p class="mb-2 text-muted"><strong>Завідувач кафедри:</strong> {{ department.head }}</p>
+        <div>
+            <strong class="text-secondary">Випускові спеціальності:</strong>
+            {% if department.specialties.all %}
+                <ul class="mb-0 mt-1">
+                    {% for specialty in department.specialties.all %}
+                        <li>{{ specialty.code }} {{ specialty.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <span class="text-muted">Немає прив'язаних спеціальностей</span>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <p>Кафедри ще не додано в адмін-панелі.</p>
+    {% endfor %}
+</div>
+{% endblock %}

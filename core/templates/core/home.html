@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Головна — ФПРН НаУКМА{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
+    <h1 class="display-5 fw-bold text-primary">{{ content.title|default:"Факультет природничих наук НаУКМА" }}</h1>
+    <hr class="my-4">
+    <div class="lead">
+        {{ content.description|default:"Інформація про факультет заповнюється в адмін-панелі."|linebreaks }}
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <h3 class="card-title text-secondary">Контакти</h3>
+        <p class="card-text">{{ content.contacts|default:"Контактна інформація заповнюється в адмін-панелі."|linebreaks }}</p>
+    </div>
+</div>
+{% endblock %}
