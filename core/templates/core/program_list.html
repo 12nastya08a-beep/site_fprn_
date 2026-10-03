@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Спеціальності — ФПРН НаУКМА{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Освітні програми та спеціальності</h2>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for specialty in specialties %}
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <span class="badge bg-secondary mb-2">Код: {{ specialty.code }}</span>
+                <h4 class="card-title">
+                    <a href="{% url 'program_detail' specialty.pk %}" class="text-decoration-none text-primary">
+                        {{ specialty.name }}
+                    </a>
+                </h4>
+                <p class="card-text text-muted">
+                    {{ specialty.description|truncatewords:50 }}
+                </p>
+                <hr>
+                <p class="card-text mb-1"><strong>Координатор:</strong> {{ specialty.coordinator_name }}</p>
+                <p class="card-text"><strong>Контакт:</strong> {{ specialty.coordinator_contact }}</p>
+            </div>
+            <div class="card-footer bg-transparent border-0 pb-3">
+                <a href="{% url 'program_detail' specialty.pk %}" class="btn btn-outline-primary btn-sm">Детальніше</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>Спеціальності ще не додано в адмін-панелі.</p>
+    {% endfor %}
+</div>
+{% endblock %}
