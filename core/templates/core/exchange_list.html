@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container my-4">
+    <h2>Програми академічного обміну</h2>
+    <div class="row mt-4">
+        {% for program in programs %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ program.university_name }} <small class="text-muted">({{ program.country }})</small></h5>
+                        <p class="card-text"><strong>Мови навчання:</strong> {{ program.languages }}</p>
+                        <p class="card-text"><strong>Кількість місць:</strong> {{ program.slots }}</p>
+                        <p class="card-text"><strong>Дедлайн:</strong> {{ program.deadline }}</p>
+
+                        <p class="card-text">
+                            <strong>Статус:</strong>
+                            {% if program.deadline >= now.date %}
+                                <span class="badge bg-success">Прийом триває</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Прийом завершено</span>
+                            {% endif %}
+                        </p>
+
+                        <p class="card-text">{{ program.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Наразі немає доступних програм обміну.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
