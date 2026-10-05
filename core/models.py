@@ -62,3 +62,19 @@ class Teacher(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.position})"
+from django.db import models
+
+class ExchangeProgram(models.Model):
+    university_name = models.CharField(max_length=255, verbose_name="Назва університету", blank=True, null=True)
+    country = models.CharField(max_length=100, verbose_name="Країна", blank=True, null=True)
+    languages = models.TextField(verbose_name="Мови навчання")
+    slots = models.IntegerField(verbose_name="Кількість місць", default=1)
+    deadline = models.DateField(verbose_name="Дедлайн")
+    description = models.TextField(verbose_name="Опис")
+
+    class Meta:
+        verbose_name = "Програма обміну"
+        verbose_name_plural = "Програми обміну"
+
+    def __str__(self):
+        return f"{self.university_name}, {self.country}"

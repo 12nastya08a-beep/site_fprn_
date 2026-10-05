@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from .models import HomePage, Department, Specialty, Teacher
+from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
+from .models import ExchangeProgram, HomePage, Department, Specialty
+
 
 def home(request):
     content = HomePage.objects.first()
@@ -25,4 +27,11 @@ def department_detail(request, pk):
         'department': department,
         'teachers': teachers,
         'specialties': specialties,
+    })
+
+def exchange_list_view(request):
+    programs = ExchangeProgram.objects.all()
+    return render(request, 'core/exchange_list.html', {
+        'programs': programs,
+        'now': timezone.now()
     })
